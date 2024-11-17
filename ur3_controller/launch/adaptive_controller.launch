@@ -1,0 +1,4 @@
+<launch>
+    <node pkg="ur3_controller" type="interface_node" name="interface_node" output="screen"/>
+    <node pkg="ur3_controller" type="ur3_adaptive_controller" name="ur3_adaptive_controller" output="screen"/>
+</launch>

@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<launch>
+    <!-- Load joint state controller -->
+    <rosparam file="$(find ur3_gazebo)/config/ur3_effort_controllers.yaml" command="load"/>
+
+
+    <node name="joint_controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
+          output="screen" ns="/ur3" args="joint_state_controller" />
+
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"
+        respawn="false" output="screen">
+        <remap from="/joint_states" to="/ur3/joint_states" />
+    </node>
+
+    <node name="ur3_controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
+          output="screen" ns="/ur3" args="shoulder_pan_joint_controller shoulder_lift_joint_controller elbow_joint_controller wrist_1_joint_controller wrist_2_joint_controller wrist_3_joint_controller" />
+    
+
+    <!-- Load joint group effort controller -->
+    <!-- <node name="joint_group_eff_controller" pkg="controller_manager" type="spawner" respawn="false"
+        output="screen" args="joint_group_eff_controller">
+        <rosparam file="$(find ur3_gazebo)/config/ur3_effort_controllers.yaml" command="load"/>
+    </node> -->
+</launch>
+
